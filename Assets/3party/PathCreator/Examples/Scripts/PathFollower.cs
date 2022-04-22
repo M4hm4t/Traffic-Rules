@@ -10,6 +10,7 @@ namespace PathCreation.Examples
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
         float distanceTravelled;
+        public GameObject stop;
 
         void Start() {
             if (pathCreator != null)
@@ -33,6 +34,14 @@ namespace PathCreation.Examples
         // is as close as possible to its position on the old path
         void OnPathChanged() {
             distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
+        }
+        public void OnCollisionEnter(UnityEngine.Collision collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                stop.GetComponent<PathFollower>().enabled = false;
+
+            }
         }
     }
 }
