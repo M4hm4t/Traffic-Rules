@@ -14,11 +14,18 @@ public class PlayerMovement : MonoBehaviour
     public GameObject lw;//arka sol lastik trail
     public GameObject rw;//arka sað lastik trail
     public GameObject con; // continue
+    public GameObject brakeSound; 
+    public GameObject pauseButton; 
     public AudioSource brake;
     public AudioClip clipBreak;
-
-    // Start is called before the first frame update
+    public AudioSource crush;
+    public AudioClip clipCrush;
   
+    // Start is called before the first frame update
+    private void Start()
+    {
+      
+    }
 
     // Update is called once per frame
     void Update()
@@ -44,11 +51,21 @@ public class PlayerMovement : MonoBehaviour
             movementSpeed = 10;
 
         }
+        if (pauseButton.activeSelf == true)
+        {
+            brakeSound.gameObject.GetComponent<AudioSource>().enabled = false;
+        }
+        else
+        {
+            brakeSound.gameObject.GetComponent<AudioSource>().enabled = true;
+        }
         if (Input.GetMouseButtonDown(0))
         {
+            
+
             brake.PlayOneShot(clipBreak);
         }
-       
+        
     }
 
     public void OnCollisionEnter(UnityEngine.Collision collision)
@@ -56,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "OtherCars")
         {
             stop.GetComponent<PlayerMovement>().enabled = false;
+            crush.PlayOneShot(clipCrush);
             con.gameObject.SetActive(true);
         }
         else
