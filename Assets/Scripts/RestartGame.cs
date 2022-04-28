@@ -14,8 +14,11 @@ public class RestartGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ReGame();
+        }
+        }
     public void ReGame() // tap to continue
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
