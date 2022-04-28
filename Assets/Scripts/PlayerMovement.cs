@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (pauseButton.activeSelf == true)
         {
             brakeSound.gameObject.GetComponent<AudioSource>().enabled = false;
+            con.gameObject.SetActive(false);
         }
         else
         {
